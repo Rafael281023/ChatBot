@@ -1,7 +1,30 @@
 {
+  "name": "chatbot",
+  "version": "1.0.0",
+  "description": "Chatbot para atendimento via WhatsApp utilizando whatsapp-web.js",
+  "main": "chatbot.js",
+  "scripts": {
+    "start": "node chatbot.js",
+    "dev": "nodemon chatbot.js"
+  },
   "dependencies": {
-    "moment-timezone": "^0.5.45",
+    "whatsapp-web.js": "^1.18.4",
     "qrcode-terminal": "^0.12.0",
-    "whatsapp-web.js": "" 
-  }
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Rafael281023/ChatBot.git"
+  },
+  "keywords": [
+    "chatbot",
+    "whatsapp",
+    "whatsapp-web.js",
+    "nodejs"
+  ],
+  "author": "Paulo",
+  "license": "MIT"
 }

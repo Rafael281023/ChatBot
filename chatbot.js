@@ -1,15 +1,22 @@
+require('dotenv').config(); // Carrega variáveis de ambiente
+
 const { Client } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 
 // Inicializando o cliente
-const client = new Client();
+const client = new Client({
+    puppeteer: {
+        args: ['--no-sandbox', '--disable-setuid-sandbox'], // Necessário para ambientes como Railway
+    },
+});
 
 client.on('qr', qr => {
+    console.log('QR Code gerado, escaneie para autenticar.');
     qrcode.generate(qr, { small: true }); // Exibe o QR Code no terminal
 });
 
 client.on('ready', () => {
-    console.log('Cliente está pronto!');
+    console.log('Cliente está pronto e conectado ao WhatsApp!');
 });
 
 // Certifique-se de que a função delay está definida
@@ -22,11 +29,12 @@ const sendMessageWithTyping = async (chat, message, delayTime = 2000) => {
         await delay(delayTime); // Delay configurável
         await client.sendMessage(chat.id._serialized, message);
     } catch (error) {
-        console.error('Erro ao enviar mensagem:', error);
+        console.error(`Erro ao enviar mensagem para ${chat.id._serialized}:`, error.message);
     }
 };
 
 client.on('message', async msg => {
+    console.log(`Mensagem recebida: ${msg.body} de ${msg.from}`);
     try {
         const chat = await msg.getChat();
 
@@ -72,7 +80,7 @@ client.on('message', async msg => {
             await sendMessageWithTyping(chat, defaultMessage);
         }
     } catch (error) {
-        console.error('Erro ao processar mensagem:', error);
+        console.error(`Erro ao processar mensagem de ${msg.from}:`, error.message);
     }
 });
 
