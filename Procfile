@@ -1,1 +1,1 @@
-web: npm start
+web: RAILWAY_ENV=production npm start

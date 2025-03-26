@@ -1,7 +1,10 @@
 require('dotenv').config(); // Carrega variáveis de ambiente
 
-if (!process.env.RAILWAY_ENV) {
-    console.warn('Aviso: Variável de ambiente RAILWAY_ENV não está definida.');
+// Define a variável RAILWAY_ENV manualmente, caso não esteja configurada
+process.env.RAILWAY_ENV = process.env.RAILWAY_ENV || 'production';
+
+if (process.env.RAILWAY_ENV !== 'production') {
+    console.warn('Aviso: RAILWAY_ENV não está configurado como "production".');
 }
 
 const { Client } = require('whatsapp-web.js');
