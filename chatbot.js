@@ -1,5 +1,9 @@
 require('dotenv').config(); // Carrega variáveis de ambiente
 
+if (!process.env.RAILWAY_ENV) {
+    console.warn('Aviso: Variável de ambiente RAILWAY_ENV não está definida.');
+}
+
 const { Client } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 
