@@ -1,7 +1,4 @@
-web: npm start
-```
-
-Se o deploy no Railway ainda não está funcionando, siga os passos abaixo para identificar e corrigir o problema:
+Para descobrir o erro no Railway quando você recebe a mensagem "There was an error deploying from source", siga os passos abaixo:
 
 ---
 
@@ -9,10 +6,10 @@ Se o deploy no Railway ainda não está funcionando, siga os passos abaixo para 
 1. Acesse o painel do Railway ([https://railway.app](https://railway.app)).
 2. Selecione o projeto correspondente ao seu chatbot.
 3. Vá até a aba **Deployments** ou **Logs**.
-4. Procure por mensagens de erro específicas, como:
+4. Revise os logs para identificar mensagens de erro específicas. Procure por:
    - **Erros de dependências** (`MODULE_NOT_FOUND`, `Cannot find module`).
    - **Problemas com o `Procfile`**.
-   - **Erros de inicialização**.
+   - **Erros de inicialização** (como `Error: Cannot find module` ou `SyntaxError`).
 
 ---
 
@@ -30,8 +27,8 @@ Antes de corrigir no Railway, teste o projeto localmente para garantir que ele f
 
 ---
 
-### Passo 3: Verifique o Arquivo `Procfile`
-Certifique-se de que o arquivo `Procfile` está configurado corretamente. Ele deve conter apenas:
+### Passo 3: Certifique-se de que o `Procfile` está correto
+O arquivo `Procfile` deve conter apenas:
 
 ```plaintext
 web: npm start
